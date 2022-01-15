@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UnitsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_GRPMST">
+          <Key>
+            <PropertyRef Name="Grpmst_id" />
+          </Key>
+          <Property Name="Grpmst_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_code" Type="varchar" MaxLength="20" />
+          <Property Name="Group_name" Type="varchar" MaxLength="100" />
+          <Property Name="Und_group" Type="varchar" MaxLength="100" />
+          <Property Name="Group_desc" Type="varchar" MaxLength="100" />
+          <Property Name="Untmst_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_ITEMAS">
+          <Key>
+            <PropertyRef Name="Itemas_id" />
+          </Key>
+          <Property Name="Itemas_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="It_code" Type="varchar" MaxLength="20" />
+          <Property Name="It_name" Type="varchar" MaxLength="100" />
+          <Property Name="It_spec" Type="varchar" MaxLength="100" />
+          <Property Name="Grpmst_id" Type="int" />
+          <Property Name="It_desc" Type="varchar" MaxLength="100" />
+          <Property Name="Untmst_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_UNTMST">
+          <Key>
+            <PropertyRef Name="Untmst_id" />
+          </Key>
+          <Property Name="Untmst_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unit_name" Type="varchar" MaxLength="50" />
+          <Property Name="Unit_group" Type="varchar" MaxLength="50" />
+          <Property Name="Unit_desc" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_GRPMST_ITEMAS_Grpmst_id">
+          <End Role="tbl_GRPMST" Type="Self.tbl_GRPMST" Multiplicity="0..1" />
+          <End Role="tbl_ITEMAS" Type="Self.tbl_ITEMAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_GRPMST">
+              <PropertyRef Name="Grpmst_id" />
+            </Principal>
+            <Dependent Role="tbl_ITEMAS">
+              <PropertyRef Name="Grpmst_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNTMST_GRPMST_Untmst_id">
+          <End Role="tbl_UNTMST" Type="Self.tbl_UNTMST" Multiplicity="0..1" />
+          <End Role="tbl_GRPMST" Type="Self.tbl_GRPMST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UNTMST">
+              <PropertyRef Name="Untmst_id" />
+            </Principal>
+            <Dependent Role="tbl_GRPMST">
+              <PropertyRef Name="Untmst_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNTMST_ITEMAS_Untmst_id">
+          <End Role="tbl_UNTMST" Type="Self.tbl_UNTMST" Multiplicity="0..1" />
+          <End Role="tbl_ITEMAS" Type="Self.tbl_ITEMAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UNTMST">
+              <PropertyRef Name="Untmst_id" />
+            </Principal>
+            <Dependent Role="tbl_ITEMAS">
+              <PropertyRef Name="Untmst_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnitsModelStoreContainer">
+          <EntitySet Name="tbl_GRPMST" EntityType="Self.tbl_GRPMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ITEMAS" EntityType="Self.tbl_ITEMAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UNTMST" EntityType="Self.tbl_UNTMST" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GRPMST_ITEMAS_Grpmst_id" Association="Self.FK_GRPMST_ITEMAS_Grpmst_id">
+            <End Role="tbl_GRPMST" EntitySet="tbl_GRPMST" />
+            <End Role="tbl_ITEMAS" EntitySet="tbl_ITEMAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNTMST_GRPMST_Untmst_id" Association="Self.FK_UNTMST_GRPMST_Untmst_id">
+            <End Role="tbl_UNTMST" EntitySet="tbl_UNTMST" />
+            <End Role="tbl_GRPMST" EntitySet="tbl_GRPMST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNTMST_ITEMAS_Untmst_id" Association="Self.FK_UNTMST_ITEMAS_Untmst_id">
+            <End Role="tbl_UNTMST" EntitySet="tbl_UNTMST" />
+            <End Role="tbl_ITEMAS" EntitySet="tbl_ITEMAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UnitsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_GRPMST">
+          <Key>
+            <PropertyRef Name="Grpmst_id" />
+          </Key>
+          <Property Name="Grpmst_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Group_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Und_group" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Group_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Untmst_id" Type="Int32" />
+          <NavigationProperty Name="tbl_ITEMAS" Relationship="Self.FK_GRPMST_ITEMAS_Grpmst_id" FromRole="tbl_GRPMST" ToRole="tbl_ITEMAS" />
+          <NavigationProperty Name="tbl_UNTMST" Relationship="Self.FK_UNTMST_GRPMST_Untmst_id" FromRole="tbl_GRPMST" ToRole="tbl_UNTMST" />
+        </EntityType>
+        <EntityType Name="tbl_ITEMAS">
+          <Key>
+            <PropertyRef Name="Itemas_id" />
+          </Key>
+          <Property Name="Itemas_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="It_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="It_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="It_spec" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Grpmst_id" Type="Int32" />
+          <Property Name="It_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Untmst_id" Type="Int32" />
+          <NavigationProperty Name="tbl_GRPMST" Relationship="Self.FK_GRPMST_ITEMAS_Grpmst_id" FromRole="tbl_ITEMAS" ToRole="tbl_GRPMST" />
+          <NavigationProperty Name="tbl_UNTMST" Relationship="Self.FK_UNTMST_ITEMAS_Untmst_id" FromRole="tbl_ITEMAS" ToRole="tbl_UNTMST" />
+        </EntityType>
+        <EntityType Name="tbl_UNTMST">
+          <Key>
+            <PropertyRef Name="Untmst_id" />
+          </Key>
+          <Property Name="Untmst_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_group" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_GRPMST" Relationship="Self.FK_UNTMST_GRPMST_Untmst_id" FromRole="tbl_UNTMST" ToRole="tbl_GRPMST" />
+          <NavigationProperty Name="tbl_ITEMAS" Relationship="Self.FK_UNTMST_ITEMAS_Untmst_id" FromRole="tbl_UNTMST" ToRole="tbl_ITEMAS" />
+        </EntityType>
+        <Association Name="FK_GRPMST_ITEMAS_Grpmst_id">
+          <End Role="tbl_GRPMST" Type="Self.tbl_GRPMST" Multiplicity="0..1" />
+          <End Role="tbl_ITEMAS" Type="Self.tbl_ITEMAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_GRPMST">
+              <PropertyRef Name="Grpmst_id" />
+            </Principal>
+            <Dependent Role="tbl_ITEMAS">
+              <PropertyRef Name="Grpmst_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNTMST_GRPMST_Untmst_id">
+          <End Role="tbl_UNTMST" Type="Self.tbl_UNTMST" Multiplicity="0..1" />
+          <End Role="tbl_GRPMST" Type="Self.tbl_GRPMST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UNTMST">
+              <PropertyRef Name="Untmst_id" />
+            </Principal>
+            <Dependent Role="tbl_GRPMST">
+              <PropertyRef Name="Untmst_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNTMST_ITEMAS_Untmst_id">
+          <End Role="tbl_UNTMST" Type="Self.tbl_UNTMST" Multiplicity="0..1" />
+          <End Role="tbl_ITEMAS" Type="Self.tbl_ITEMAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UNTMST">
+              <PropertyRef Name="Untmst_id" />
+            </Principal>
+            <Dependent Role="tbl_ITEMAS">
+              <PropertyRef Name="Untmst_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_GRPMST" EntityType="Self.tbl_GRPMST" />
+          <EntitySet Name="tbl_ITEMAS" EntityType="Self.tbl_ITEMAS" />
+          <EntitySet Name="tbl_UNTMST" EntityType="Self.tbl_UNTMST" />
+          <AssociationSet Name="FK_GRPMST_ITEMAS_Grpmst_id" Association="Self.FK_GRPMST_ITEMAS_Grpmst_id">
+            <End Role="tbl_GRPMST" EntitySet="tbl_GRPMST" />
+            <End Role="tbl_ITEMAS" EntitySet="tbl_ITEMAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNTMST_GRPMST_Untmst_id" Association="Self.FK_UNTMST_GRPMST_Untmst_id">
+            <End Role="tbl_UNTMST" EntitySet="tbl_UNTMST" />
+            <End Role="tbl_GRPMST" EntitySet="tbl_GRPMST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNTMST_ITEMAS_Untmst_id" Association="Self.FK_UNTMST_ITEMAS_Untmst_id">
+            <End Role="tbl_UNTMST" EntitySet="tbl_UNTMST" />
+            <End Role="tbl_ITEMAS" EntitySet="tbl_ITEMAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UnitsModelStoreContainer" CdmEntityContainer="DataModel">
+          <EntitySetMapping Name="tbl_GRPMST">
+            <EntityTypeMapping TypeName="UnitsModel.tbl_GRPMST">
+              <MappingFragment StoreEntitySet="tbl_GRPMST">
+                <ScalarProperty Name="Grpmst_id" ColumnName="Grpmst_id" />
+                <ScalarProperty Name="Group_code" ColumnName="Group_code" />
+                <ScalarProperty Name="Group_name" ColumnName="Group_name" />
+                <ScalarProperty Name="Und_group" ColumnName="Und_group" />
+                <ScalarProperty Name="Group_desc" ColumnName="Group_desc" />
+                <ScalarProperty Name="Untmst_id" ColumnName="Untmst_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ITEMAS">
+            <EntityTypeMapping TypeName="UnitsModel.tbl_ITEMAS">
+              <MappingFragment StoreEntitySet="tbl_ITEMAS">
+                <ScalarProperty Name="Itemas_id" ColumnName="Itemas_id" />
+                <ScalarProperty Name="It_code" ColumnName="It_code" />
+                <ScalarProperty Name="It_name" ColumnName="It_name" />
+                <ScalarProperty Name="It_spec" ColumnName="It_spec" />
+                <ScalarProperty Name="Grpmst_id" ColumnName="Grpmst_id" />
+                <ScalarProperty Name="It_desc" ColumnName="It_desc" />
+                <ScalarProperty Name="Untmst_id" ColumnName="Untmst_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UNTMST">
+            <EntityTypeMapping TypeName="UnitsModel.tbl_UNTMST">
+              <MappingFragment StoreEntitySet="tbl_UNTMST">
+                <ScalarProperty Name="Untmst_id" ColumnName="Untmst_id" />
+                <ScalarProperty Name="Unit_name" ColumnName="Unit_name" />
+                <ScalarProperty Name="Unit_group" ColumnName="Unit_group" />
+                <ScalarProperty Name="Unit_desc" ColumnName="Unit_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
